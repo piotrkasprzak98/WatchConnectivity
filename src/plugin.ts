@@ -7,7 +7,7 @@ export const WatchMessage = registerPlugin<WatchMessagePlugin>('CapacitorWatchMe
     throw new Error('Not implemented for web');
   },
   android: () => {
-    throw new Error('Not implemented for web');
+    throw new Error('Not implemented for android');
   },
 });
 
