@@ -1,6 +1,6 @@
 {
   "name": "capacitor-watch-messages",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "this is a Plugin to cominicate with apple watch ",
   "main": "dist/plugin.js",
   "module": "dist/esm/index.js",
@@ -37,8 +37,9 @@
   },
   "files": [
     "dist/",
-    "ios/",
-    "android/",
+    "ios/Plugin/",
+    "android/src/main/",
+    "android/build.gradle",
     "CapacitorWatchMessages.podspec"
   ],
   "keywords": [
