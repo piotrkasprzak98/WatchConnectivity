@@ -9,8 +9,8 @@ import WatchConnectivity
 @objc(CapacitorWatchMessage)
 public class CapacitorWatchMessage: CAPPlugin {
 
-  private let messageSender: MessageSender = MessageSender()
-  
+  private let implementation: MessageSender = MessageSender()
+
   override public func load() {
     NotificationCenter.default.addObserver(
       self,
@@ -26,7 +26,27 @@ public class CapacitorWatchMessage: CAPPlugin {
   }
 
   @objc func sendMessageToWatch(_ call: CAPPluginCall) {
-    messageSender.sendMessageToWatch(call: call)
+    implementation.sendMessageToWatch(call: call)
+  }
+
+  @objc public func startWatchAppWithWorkoutConfiguration(_ call: CAPPluginCall) {
+    implementation.startWatchAppWithWorkoutConfiguration(call: call)
+  }
+
+  @objc public func transferUserInfoToWatch(_ call: CAPPluginCall) {
+    implementation.transferUserInfoToWatch(call: call)
+  }
+
+  @objc public func updateApplicationContextWatch(_ call: CAPPluginCall) {
+    implementation.updateApplicationContextWatch(call: call)
+  }
+
+  @objc public func isWatchPaired(_ call: CAPPluginCall){
+    implementation.isWatchPaired(call: call)
+  }
+
+  @objc public func isWatchAppInstalled(_ call: CAPPluginCall) {
+    implementation.isWatchAppInstalled(call: call)
   }
   
   @objc func handleApplicationActive(notification: NSNotification) {
