@@ -12,6 +12,7 @@ import WatchConnectivity
 import Capacitor
 
 public let COMMAND_KEY = "jsCommand"
+public let USER_INFO_KEY = "jsUserInfo"
 
 @objc public class MessageSender: NSObject {
 
@@ -29,6 +30,35 @@ public let COMMAND_KEY = "jsCommand"
     }
     WCSession.default.sendMessage([key: value], replyHandler: nil)
     call.resolve(["result": true])
+  }
+
+  @objc public func getWatchInformation(call: CAPPluginCall) {
+    guard WCSession.default.activationState == .activated  else {
+      call.reject("activation state has to be active")
+      return
+    }
+    WCSession.default.sendMessage([PluginConstants.infoCommand: ""], replyHandler: { reply in
+      var response: [String: Any] = [:]
+      if let watchName: String = reply[PluginConstants.watchName] as? String {
+        UserDefaults.standard.setValue(watchName, forKey: PluginConstants.watchName)
+        response.updateValue(watchName, forKey: PluginConstants.watchName)
+      }
+      if let watchBattery: Int = reply[PluginConstants.watchBattery] as? Int {
+        UserDefaults.standard.setValue(watchBattery, forKey: PluginConstants.watchBattery)
+        response.updateValue(watchBattery, forKey: PluginConstants.watchBattery)
+      }
+      call.resolve(["result": response])
+    }, errorHandler: { error in
+      call.reject(error.localizedDescription)
+    })
+  }
+
+  @objc public func getWatchStoredName(call: CAPPluginCall) {
+    if let name: String = UserDefaults.standard.string(forKey: PluginConstants.watchName) {
+      call.resolve(["result": name])
+    } else {
+      call.reject("apple watch name not stored")
+    }
   }
 
   @objc public func startWatchAppWithWorkoutConfiguration(call: CAPPluginCall) {
@@ -127,14 +157,10 @@ public let COMMAND_KEY = "jsCommand"
   }
   
   public func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-    var args: [String: Any] = [:]
-    args["message"] = message
     handleWatchMessage(message)
   }
   
   public func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-    var args: [String: Any] = [:]
-    args["message"] = message
     handleWatchMessage(message)
   }
   
@@ -152,8 +178,9 @@ public let COMMAND_KEY = "jsCommand"
   
   public func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any] = [:]) {
     var args: [String: Any] = [:]
-    args["userInfo"] = userInfo
-    handleWatchMessage(userInfo)
+    args[PluginConstants.userInfo] = userInfo
+    handleWatchUserInfo(args)
+    checkIfContainsWatchData(args)
   }
   
   func commandToJS(_ command: String) {
@@ -166,6 +193,23 @@ public let COMMAND_KEY = "jsCommand"
   func handleWatchMessage(_ userInfo: [String: Any]) {
     if let command: String = userInfo.values.first as? String {
       commandToJS(command)
+    }
+  }
+
+  func handleWatchUserInfo(_ userInfo: [String: Any]) {
+    NotificationCenter.default.post(
+      name: Notification.Name(USER_INFO_KEY),
+      object: nil,
+      userInfo: userInfo)
+  }
+
+  private func checkIfContainsWatchData(_ userInfo: [String: Any]) {
+    if let userInfo: [String : Any] = userInfo[PluginConstants.userInfo] as? [String : Any] {
+      if userInfo.keys.contains(where: { $0 == PluginConstants.watchInfo }) {
+        if let watchName: String = userInfo[PluginConstants.watchName] as? String {
+          UserDefaults.standard.setValue(watchName, forKey: PluginConstants.watchName)
+        }
+      }
     }
   }
   

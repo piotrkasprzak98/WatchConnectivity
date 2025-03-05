@@ -23,6 +23,12 @@ public class CapacitorWatchMessage: CAPPlugin {
       selector: #selector(self.handleCommandFromWatch(_:)),
       name: Notification.Name(COMMAND_KEY),
       object: nil)
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.handleUserInfoFromWatch(_:)),
+      name: Notification.Name(USER_INFO_KEY),
+      object: nil)
   }
 
   @objc func sendMessageToWatch(_ call: CAPPluginCall) {
@@ -48,7 +54,15 @@ public class CapacitorWatchMessage: CAPPlugin {
   @objc public func isWatchAppInstalled(_ call: CAPPluginCall) {
     implementation.isWatchAppInstalled(call: call)
   }
-  
+
+  @objc public func getWatchInformation(_ call: CAPPluginCall) {
+    implementation.getWatchInformation(call: call)
+  }
+
+  @objc public func getWatchStoredName(_ call: CAPPluginCall) {
+    implementation.getWatchStoredName(call: call)
+  }
+
   @objc func handleApplicationActive(notification: NSNotification) {
     assert(WCSession.isSupported(), "This sample requires Watch Connectivity support!")
     WCSession.default.delegate = CapWatchSessionDelegate.shared
@@ -56,9 +70,16 @@ public class CapacitorWatchMessage: CAPPlugin {
   }
 
   @objc func handleCommandFromWatch(_ notification: NSNotification) {
-      if let command = notification.userInfo![COMMAND_KEY] as? String {
-          print("WATCH process: \(command)")
-          notifyListeners("runCommand", data: ["command": command])
+      if let command = notification.userInfo?[COMMAND_KEY] as? String {
+          debugPrint("WATCH process: \(command)")
+        notifyListeners(PluginConstants.commandListener, data: [PluginConstants.command: command])
       }
+  }
+
+  @objc func handleUserInfoFromWatch(_ notification: NSNotification) {
+    if let userInfo: [String : Any] = notification.userInfo?[PluginConstants.userInfo] as? [String : Any] {
+      debugPrint("WATCH user Info: \(userInfo)")
+      notifyListeners(PluginConstants.userInfoListener, data: userInfo)
+    }
   }
 }

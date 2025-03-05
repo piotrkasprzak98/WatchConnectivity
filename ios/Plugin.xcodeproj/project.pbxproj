@@ -15,6 +15,7 @@
 		50ADFFA82020EE4F00D50D53 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFFA72020EE4F00D50D53 /* Plugin.m */; };
 		50E1A94820377CB70090CE1A /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E1A94720377CB70090CE1A /* Plugin.swift */; };
 		9B2AB5D4D0CD558F852B9368 /* Pods_PluginTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1C3DA23BC4521DD2BCAF4B /* Pods_PluginTests.framework */; };
+		ADA7DF9C2D78C16B001BA4E1 /* PluginConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA7DF9B2D78C16B001BA4E1 /* PluginConstants.swift */; };
 		ADFB5F9C2CF5696A002B87A0 /* Implementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFB5F9B2CF5696A002B87A0 /* Implementation.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		50ADFFA52020D75100D50D53 /* Capacitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Capacitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50ADFFA72020EE4F00D50D53 /* Plugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		50E1A94720377CB70090CE1A /* Plugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plugin.swift; sourceTree = "<group>"; };
+		ADA7DF9B2D78C16B001BA4E1 /* PluginConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginConstants.swift; sourceTree = "<group>"; };
 		ADFB5F9B2CF5696A002B87A0 /* Implementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Implementation.swift; sourceTree = "<group>"; };
 		BCB7B8688803ACCABE71A900 /* Pods-PluginTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PluginTests.debug.xcconfig"; path = "Target Support Files/Pods-PluginTests/Pods-PluginTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EC92E414D05927F184D2161B /* Pods-Plugin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Plugin.release.xcconfig"; path = "Target Support Files/Pods-Plugin/Pods-Plugin.release.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		50ADFF8A201F53D600D50D53 /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
+				ADA7DF9A2D78C15D001BA4E1 /* Constants */,
 				ADFB5F9B2CF5696A002B87A0 /* Implementation.swift */,
 				50E1A94720377CB70090CE1A /* Plugin.swift */,
 				50ADFF8B201F53D600D50D53 /* Plugin.h */,
@@ -118,6 +121,14 @@
 				FB1C3DA23BC4521DD2BCAF4B /* Pods_PluginTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ADA7DF9A2D78C15D001BA4E1 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				ADA7DF9B2D78C16B001BA4E1 /* PluginConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		EA75F2F5AA4BE350DA0A8984 /* Pods */ = {
@@ -313,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA7DF9C2D78C16B001BA4E1 /* PluginConstants.swift in Sources */,
 				50E1A94820377CB70090CE1A /* Plugin.swift in Sources */,
 				ADFB5F9C2CF5696A002B87A0 /* Implementation.swift in Sources */,
 				50ADFFA82020EE4F00D50D53 /* Plugin.m in Sources */,

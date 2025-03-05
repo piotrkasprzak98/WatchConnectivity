@@ -1,4 +1,4 @@
-import { BoolResult, MessageProps, WorkoutProps } from '../definitions';
+import { BoolResult, MessageProps, StringResult, WatchEventNames, WatchInfoResult, WorkoutProps } from '../definitions';
 import { WatchMessage } from '../plugin'
 import { PluginListenerHandle } from '@capacitor/core';
 
@@ -7,7 +7,7 @@ export const WatchConnect = {
     return WatchMessage.sendMessageToWatch(message);
   },
 
-  addListener: (eventName: 'runCommand', listenerFunc: (data: { command: string; }) => void): Promise<PluginListenerHandle> & PluginListenerHandle => {
+  addListener: (eventName: WatchEventNames, listenerFunc: (data: { command: string; }) => void): Promise<PluginListenerHandle> & PluginListenerHandle => {
     return WatchMessage.addListener(eventName, listenerFunc);
   },
 
@@ -29,5 +29,13 @@ export const WatchConnect = {
 
   isWatchAppInstalled: (): Promise<BoolResult> => {
     return WatchMessage.isWatchAppInstalled();
+  },
+
+  getWatchInformation: (): Promise<WatchInfoResult> => {
+    return WatchMessage.getWatchInformation();
+  },
+  
+  getWatchStoredName: (): Promise<StringResult> => {
+    return WatchMessage.getWatchStoredName();
   },
 }

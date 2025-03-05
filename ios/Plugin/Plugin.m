@@ -11,4 +11,6 @@ CAP_PLUGIN(CapacitorWatchMessage, "CapacitorWatchMessage",
            CAP_PLUGIN_METHOD(updateApplicationContextWatch, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(isWatchPaired, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(isWatchAppInstalled, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(getWatchInformation, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(getWatchStoredName, CAPPluginReturnPromise);
 )
