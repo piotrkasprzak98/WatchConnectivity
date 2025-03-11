@@ -29,6 +29,12 @@ public class CapacitorWatchMessage: CAPPlugin {
       selector: #selector(self.handleUserInfoFromWatch(_:)),
       name: Notification.Name(USER_INFO_KEY),
       object: nil)
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.handleHeartRateFromWatch(_:)),
+      name: Notification.Name(HEART_RATE_INFO_KEY),
+      object: nil)
   }
 
   @objc func sendMessageToWatch(_ call: CAPPluginCall) {
@@ -80,6 +86,12 @@ public class CapacitorWatchMessage: CAPPlugin {
     if let userInfo: [String : Any] = notification.userInfo?[PluginConstants.userInfo] as? [String : Any] {
       debugPrint("WATCH user Info: \(userInfo)")
       notifyListeners(PluginConstants.userInfoListener, data: userInfo)
+    }
+  }
+
+  @objc func handleHeartRateFromWatch(_ notification: NSNotification) {
+    if let userInfo: [String : Any] = notification.userInfo as? [String : Any] {
+      notifyListeners(PluginConstants.heartRateListener, data: userInfo)
     }
   }
 }

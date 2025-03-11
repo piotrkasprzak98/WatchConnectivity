@@ -13,6 +13,7 @@ import Capacitor
 
 public let COMMAND_KEY = "jsCommand"
 public let USER_INFO_KEY = "jsUserInfo"
+public let HEART_RATE_INFO_KEY = "jsHeartRateMessage"
 
 @objc public class MessageSender: NSObject {
 
@@ -194,6 +195,11 @@ public let USER_INFO_KEY = "jsUserInfo"
     if let command: String = userInfo.values.first as? String {
       commandToJS(command)
     }
+    if userInfo.keys.contains(where: { key in
+      key.contains(PluginConstants.heartRateMessage)
+    }) {
+      notifyHeartRate(userInfo)
+    }
   }
 
   func handleWatchUserInfo(_ userInfo: [String: Any]) {
@@ -201,6 +207,13 @@ public let USER_INFO_KEY = "jsUserInfo"
       name: Notification.Name(USER_INFO_KEY),
       object: nil,
       userInfo: userInfo)
+  }
+
+  func notifyHeartRate(_ message: [String: Any]) {
+    NotificationCenter.default.post(
+      name: Notification.Name(HEART_RATE_INFO_KEY),
+      object: nil,
+      userInfo: message)
   }
 
   private func checkIfContainsWatchData(_ userInfo: [String: Any]) {

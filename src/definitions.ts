@@ -19,7 +19,8 @@ export type WatchInfo = {
 
 export type WatchEventNames = 
 | 'runCommand'
-| 'userInfoListener';
+| 'userInfoListener'
+| 'heartRateListener';
 
 export type MessageProps = {
   key: string;
