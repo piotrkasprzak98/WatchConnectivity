@@ -1,6 +1,6 @@
 {
-  "name": "capacitor-watch-messages",
-  "version": "0.1.2",
+  "name": "capacitor-watch-messages-fixed",
+  "version": "1.0.3",
   "description": "this is a Plugin to cominicate with apple watch ",
   "main": "dist/plugin.js",
   "module": "dist/esm/index.js",
@@ -9,8 +9,7 @@
     "lint": "npm run prettier -- --check && npm run swiftlint -- lint",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
-    "build": "npm run clean && tsc && rollup -c rollup.config.js",
-    "clean": "rimraf ./dist",
+    "build": "tsc && rollup -c rollup.config.js",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build"
   },
@@ -40,7 +39,7 @@
     "ios/Plugin/",
     "android/src/main/",
     "android/build.gradle",
-    "CapacitorWatchMessages.podspec"
+    "CapacitorWatchMessagesFixed.podspec"
   ],
   "keywords": [
     "capacitor",
@@ -59,9 +58,9 @@
   "swiftlint": "@ionic/swiftlint-config",
   "repository": {
     "type": "git",
-    "url": "https://github.com/franciscoGERook/WatchConnectivity.git"
+    "url": "https://github.com/piotrkasprzak98/WatchConnectivity.git"
   },
   "bugs": {
-    "url": "https://github.com/franciscoGERook/WatchConnectivity.git/issues"
+    "url": "https://github.com/piotrkasprzak98/WatchConnectivity.git/issues"
   }
 }
