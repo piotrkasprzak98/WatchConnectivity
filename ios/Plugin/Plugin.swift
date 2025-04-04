@@ -70,6 +70,9 @@ public class CapacitorWatchMessage: CAPPlugin {
   }
 
   @objc func handleApplicationActive(notification: NSNotification) {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+            return
+    }
     assert(WCSession.isSupported(), "This sample requires Watch Connectivity support!")
     WCSession.default.delegate = CapWatchSessionDelegate.shared
     WCSession.default.activate()

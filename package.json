@@ -1,6 +1,6 @@
 {
   "name": "capacitor-watch-messages-fixed",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "this is a Plugin to cominicate with apple watch ",
   "main": "dist/plugin.js",
   "module": "dist/esm/index.js",
